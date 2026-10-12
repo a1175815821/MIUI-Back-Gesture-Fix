@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MIUI 侧滑返回修复</string>
+    <string name="xposed_desc">修复 HyperOS/MIUI 桌面侧滑返回失效（BackMotionEvent 构造失败，导致 App 收到 null 事件而中止返回手势）。作用域：系统桌面 com.miui.home</string>
+    <string-array name="xposedscope">
+        <item>com.miui.home</item>
+    </string-array>
+</resources>

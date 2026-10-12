@@ -1,0 +1,13 @@
+# 构建产物
+build/
+*.apk
+
+# IDE
+.idea/
+*.iml
+.gradle/
+local.properties
+
+# 系统
+.DS_Store
+Thumbs.db
