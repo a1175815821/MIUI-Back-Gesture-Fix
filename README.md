@@ -2,6 +2,8 @@
 
 **侧滑返回坏了？装这个就好了。**
 
+<p align="right"><b>简体中文</b> · <a href="README_EN.md">English</a></p>
+
 一个 LSPosed 模块，修复 **HyperOS / MIUI 上「从屏幕边缘侧滑」完全没反应** 的问题 —— Chrome、Mihon 等一大批 App 都中招，但返回键又是好的。
 
 [![Release](https://img.shields.io/badge/release-1.1-blue?style=flat-square)](https://github.com/a1175815821/MIUI-Back-Gesture-Fix/releases)

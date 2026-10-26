@@ -2,6 +2,8 @@
 
 **Swipe-to-go-back not working? This fixes it.**
 
+<p align="right"><a href="README.md">简体中文</a> · <b>English</b></p>
+
 An LSPosed module that repairs the **broken edge-swipe-back gesture** on **HyperOS / MIUI** — the one that makes Chrome, Mihon and many other apps ignore your swipe, while the back key still works fine.
 
 [![Release](https://img.shields.io/badge/release-1.1-blue?style=flat-square)](https://github.com/a1175815821/MIUI-Back-Gesture-Fix/releases)
