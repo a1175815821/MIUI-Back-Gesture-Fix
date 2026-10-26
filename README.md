@@ -15,6 +15,7 @@
 | 最新版本 | `1.1`（versionCode `2`） |
 | 作用域 | `com.miui.home`（系统桌面） |
 | 适用 | Android 14 上的 HyperOS / MIUI |
+| LSPosed 仓库 | [Xposed-Modules-Repo/io.github.a1175815821.miuibackfix](https://github.com/Xposed-Modules-Repo/io.github.a1175815821.miuibackfix) |
 
 ---
 
