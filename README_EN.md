@@ -6,8 +6,15 @@ An **LSPosed module** that fixes the broken **edge-swipe-to-go-back gesture** on
 > The hardware/software back key works fine, and the gesture works in system Settings.
 > Nothing is broken on disk — the system just fails while **forwarding the gesture event** to the app.
 
-[![Release](https://img.shields.io/badge/release-v1.0-blue)](https://github.com/a1175815821/MIUI-Back-Gesture-Fix/releases)
+[![Release](https://img.shields.io/badge/release-v1.1-blue)](https://github.com/a1175815821/MIUI-Back-Gesture-Fix/releases)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
+| Field | Value |
+|---|---|
+| Package | `io.github.a1175815821.miuibackfix` |
+| Latest | `1.1` (versionCode `2`) |
+| Scope | `com.miui.home` (system launcher) |
+| Target | HyperOS / MIUI on Android 14 |
 
 ---
 
@@ -131,8 +138,8 @@ Adjust `SDK` and `JAVA_HOME_WIN` at the top of `build.sh` for your environment.
 The module logs to the LSPosed log (`/data/adb/lspd/log/`):
 
 ```
-(com.miui.home)[com.wbai.miuibackfix] [MiuiBackFix] built BackMotionEvent via 7-arg ctor
-(com.miui.home)[com.wbai.miuibackfix] [MiuiBackFix] getInstance -> fixed
+(com.miui.home)[io.github.a1175815821.miuibackfix] [MiuiBackFix] built BackMotionEvent via 7-arg ctor
+(com.miui.home)[io.github.a1175815821.miuibackfix] [MiuiBackFix] getInstance -> fixed
 ```
 
 If it's too noisy, comment out the `log(...)` calls in `BackFix.java` and rebuild.

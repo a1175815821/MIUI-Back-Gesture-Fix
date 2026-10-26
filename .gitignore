@@ -2,6 +2,9 @@
 build/
 *.apk
 
+# 签名密钥（绝不外传，否则他人可伪造同包名的更新）
+keystore/
+
 # IDE
 .idea/
 *.iml

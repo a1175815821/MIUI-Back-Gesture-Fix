@@ -1,4 +1,4 @@
-package com.wbai.miuibackfix;
+package io.github.a1175815821.miuibackfix;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;

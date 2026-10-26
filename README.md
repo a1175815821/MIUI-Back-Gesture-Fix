@@ -6,8 +6,15 @@
 > 但按**返回键**正常，在「系统设置」里侧滑也正常。
 > 文件/系统本身没坏 —— 是系统在**转发手势事件**时挂了。
 
-[![Release](https://img.shields.io/badge/release-v1.0-blue)](https://github.com/a1175815821/MIUI-Back-Gesture-Fix/releases)
+[![Release](https://img.shields.io/badge/release-v1.1-blue)](https://github.com/a1175815821/MIUI-Back-Gesture-Fix/releases)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
+| 项 | 值 |
+|---|---|
+| 包名 | `io.github.a1175815821.miuibackfix` |
+| 最新版本 | `1.1`（versionCode `2`） |
+| 作用域 | `com.miui.home`（系统桌面） |
+| 适用 | Android 14 上的 HyperOS / MIUI |
 
 ---
 
@@ -121,6 +128,14 @@ bash build.sh
 
 `lib/api82.jar` 是编译所需的 Xposed API（来源：`de.robv.android.xposed:api:82`）。
 
+### 关于签名
+
+构建脚本使用**固定密钥** `keystore/miuibackfix.jks`（首次构建时自动生成，密码见脚本内 `KS_PASS`）。
+
+- 该文件**没有**提交到仓库（见 `.gitignore`）—— 它是本项目的发布签名密钥，泄露后他人就能伪造同包名的「更新」。
+- **请务必备份它。** 一旦丢失，后续版本无法覆盖升级，所有用户只能先卸载再装新版。
+- 如果你是 fork 后自行构建，用你自己的密钥即可，但**不能**用于给本项目的用户推送更新。
+
 ---
 
 ## 日志
@@ -128,8 +143,8 @@ bash build.sh
 模块会在 LSPosed 日志（`/data/adb/lspd/log/`）里输出：
 
 ```
-(com.miui.home)[com.wbai.miuibackfix] [MiuiBackFix] built BackMotionEvent via 7-arg ctor
-(com.miui.home)[com.wbai.miuibackfix] [MiuiBackFix] getInstance -> fixed
+(com.miui.home)[io.github.a1175815821.miuibackfix] [MiuiBackFix] built BackMotionEvent via 7-arg ctor
+(com.miui.home)[io.github.a1175815821.miuibackfix] [MiuiBackFix] getInstance -> fixed
 ```
 
 觉得刷屏的话，把 `BackFix.java` 里的 `log(...)` 调用注释掉，重新 `bash build.sh` 即可。

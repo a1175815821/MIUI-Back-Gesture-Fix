@@ -27,7 +27,7 @@ echo "== 1/6 javac =="
 "$JAVAC" -source 8 -target 8 -encoding UTF-8 -nowarn \
   -cp "$ANDROID_JAR;$WORK/api82.jar" \
   -d build/classes \
-  src/com/wbai/miuibackfix/BackFix.java
+  src/io/github/a1175815821/miuibackfix/BackFix.java
 echo "javac ok"
 find build/classes -name "*.class"
 
@@ -63,11 +63,22 @@ PYEOF
 
 echo "== 6/6 zipalign + sign =="
 "$BT/zipalign.exe" -f 4 build/unsigned.apk build/aligned.apk
-rm -f build/ks.jks
-"$KEYTOOL" -genkeypair -keystore build/ks.jks -alias k -keyalg RSA -keysize 2048 \
-  -validity 10000 -storepass 123456 -keypass 123456 \
-  -dname "CN=wbai, OU=dev, O=dev, L=x, S=x, C=CN" >/dev/null 2>&1
-"$BT/apksigner.bat" sign --ks build/ks.jks --ks-pass pass:123456 --key-pass pass:123456 \
+
+# 使用固定签名密钥：同一包名的后续版本必须用同一把 key 签名，
+# 否则老用户无法覆盖升级（只能先卸载）。
+KS="$SRC/keystore/miuibackfix.jks"
+KS_ALIAS="miuibackfix"
+KS_PASS="${KS_PASS:-miuibackfix}"
+if [ ! -f "$KS" ]; then
+  echo "!! 未找到签名密钥，生成新的：$KS"
+  echo "!! 请务必备份该文件，丢失后将无法发布可覆盖升级的新版本"
+  mkdir -p "$(dirname "$KS")"
+  "$KEYTOOL" -genkeypair -keystore "$KS" -alias "$KS_ALIAS" -keyalg RSA -keysize 2048 \
+    -validity 10000 -storepass "$KS_PASS" -keypass "$KS_PASS" \
+    -dname "CN=MIUI Back Gesture Fix, OU=dev, O=a1175815821, L=CN, ST=CN, C=CN" >/dev/null 2>&1
+fi
+"$BT/apksigner.bat" sign --ks "$KS" --ks-key-alias "$KS_ALIAS" \
+  --ks-pass "pass:$KS_PASS" --key-pass "pass:$KS_PASS" \
   --out build/miuibackfix.apk build/aligned.apk
 "$BT/apksigner.bat" verify --print-certs build/miuibackfix.apk | head -3
 ls -la build/miuibackfix.apk
