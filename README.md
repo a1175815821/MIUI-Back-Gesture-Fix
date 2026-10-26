@@ -193,15 +193,24 @@ XposedBridge.hookAllMethods(
 
 ```bash
 bash build.sh
-# 产物：build/miuibackfix.apk
+# 产物：build/miuibackfix.apk（结束时会打印 SHA256）
 ```
 
-依赖：**JDK 17** + **Android SDK**（`build-tools` 与 `platforms/android-34`）。
-首次使用请按你的环境修改 `build.sh` 顶部的 `SDK` 与 `JAVA_HOME_WIN` 路径。
+依赖 **JDK 17** + **Android SDK**（`build-tools` 34、`platforms/android-34`）+ **Python 3**。
 
-> ⚠️ 两个容易踩的坑：
+脚本会自动定位自身所在目录，**一般不用改任何代码**；路径不对时用环境变量覆盖：
+
+| 变量 | 默认值 | 说明 |
+|---|---|---|
+| `ANDROID_SDK_ROOT` / `ANDROID_HOME` | `C:/Users/.../Android/Sdk` | Android SDK 路径 |
+| `JAVA_HOME` | `C:/Program Files/Java/jdk-17.0.3.1` | JDK 17 |
+| `PYTHON` | `python3` / `python` | 打包 `classes.dex` 用 |
+| `BUILD_TOOLS_VERSION` | `34.0.0` | build-tools 版本 |
+| `KS_PASS` | `miuibackfix` | 签名密钥口令 |
+
+> 两个坑（脚本已处理，改脚本时注意）：
 > 1. `d8` / `aapt2` / `apksigner` 是 Windows 程序，**必须传 `C:/` 形式的路径**；
-> 2. 构建目录**不能带空格**（`$(find ...)` 展开会被空格打断）。
+> 2. 构建中间目录**不能带空格**（`$(find ...)` 展开会被空格打断），所以中间产物放在系统临时目录。
 
 `lib/api82.jar` 是编译所需的 Xposed API（来源：`de.robv.android.xposed:api:82`）。
 

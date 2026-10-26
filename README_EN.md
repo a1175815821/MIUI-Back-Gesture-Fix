@@ -176,15 +176,24 @@ No Gradle needed — plain Android SDK build-tools:
 
 ```bash
 bash build.sh
-# output: build/miuibackfix.apk
+# output: build/miuibackfix.apk (SHA256 printed at the end)
 ```
 
-Requires **JDK 17** + **Android SDK** (`build-tools` and `platforms/android-34`).
-Adjust `SDK` and `JAVA_HOME_WIN` at the top of `build.sh` for your machine.
+Requires **JDK 17** + **Android SDK** (`build-tools` 34, `platforms/android-34`) + **Python 3**.
 
-> ⚠️ Two gotchas:
+The script locates its own directory, so **you normally don't need to edit anything**. Override paths with environment variables if needed:
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `ANDROID_SDK_ROOT` / `ANDROID_HOME` | `C:/Users/.../Android/Sdk` | Android SDK |
+| `JAVA_HOME` | `C:/Program Files/Java/jdk-17.0.3.1` | JDK 17 |
+| `PYTHON` | `python3` / `python` | used to pack `classes.dex` |
+| `BUILD_TOOLS_VERSION` | `34.0.0` | build-tools version |
+| `KS_PASS` | `miuibackfix` | signing key password |
+
+> Two gotchas (already handled by the script, mind them when editing it):
 > 1. `d8` / `aapt2` / `apksigner` are Windows binaries — pass **`C:/` style paths**;
-> 2. The build directory **must not contain spaces** (the `$(find ...)` expansion breaks).
+> 2. The intermediate build directory **must not contain spaces** (the `$(find ...)` expansion breaks), so it is placed under the system temp dir.
 
 `lib/api82.jar` is the Xposed API used for compilation (`de.robv.android.xposed:api:82`).
 
